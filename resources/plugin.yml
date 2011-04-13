@@ -1,0 +1,9 @@
+name: Spawn Buttons
+main: net.deaygo.SpawnButtons.SpawnButtons
+version: 0.1
+author: Deaygo
+commands:
+    spawnblocks:
+        description: get a glowstone block to create and delete spawn blocks.
+        usage: |
+            /<command>

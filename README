@@ -1,0 +1,9 @@
+How to use this plugin.
+- You require the Permissions Mod
+- People you want to be able to set spawn buttons need the spawnblocks.create  permission
+- People you want to be able to utilize the buttons need the spawnblocks.use   permission
+- To create a spawn block place either a stone button or a stone pressure plate
+	- Pull out a glowstone block
+	- Left click to register a spawn button
+	- Right click to de-register a spawn button
+- To get a glowstone block type /spawnblocks and it will give you one glowstone block if you have the spawnblocks.create permission

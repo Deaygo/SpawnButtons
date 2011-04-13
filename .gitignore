@@ -1,0 +1,9 @@
+bin
+target
+dist
+lib
+pom
+.project
+.classpath
+.settings
+resources/build.xml
