@@ -55,25 +55,6 @@ public class SBPlayerListener extends PlayerListener {
             p.save();
         }
     }
-    
-    
-
-    @Override
-	public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
-    	String command = event.getMessage().split(" ")[0];
-    	if ( command.equalsIgnoreCase("/home"))
-    	{
-    		SBPlayer s = settings.getPlayer(event.getPlayer().getName());
-            if ( s != null )
-            {
-                if (SpawnButtons.Permissions.has(event.getPlayer(), "spawnblocks.use"))
-                {
-                	event.setCancelled(true);
-                    event.getPlayer().teleport(new Location(s.getSpawn().getWorld(), s.getSpawn().getX(),s.getSpawn().getY(), s.getSpawn().getZ()));
-                }
-            }
-    	}
-	}
 
 	@Override
     public void onPlayerInteract(PlayerInteractEvent event) {
