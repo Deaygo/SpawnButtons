@@ -82,7 +82,7 @@ public class SBPlayerListener extends PlayerListener {
         if ( b != null )
         {
         
-            if ( b.getType() == Material.STONE_BUTTON || b.getType() == Material.STONE_PLATE )
+            if ( b.getType() == Material.STONE_BUTTON || b.getType() == Material.STONE_PLATE || b.getType() == Material.WOOD_PLATE )
             {
                 if ( event.getPlayer().getItemInHand().getType() == Material.GLOWSTONE && event.getAction() != Action.PHYSICAL )
                 {
@@ -120,6 +120,7 @@ public class SBPlayerListener extends PlayerListener {
                                 event.setUseItemInHand(Result.DENY);
                                 event.setUseInteractedBlock(Result.DENY);
                                 event.setCancelled(true);
+                                settings.saveBlocks();
                             }
                         }
                     }
