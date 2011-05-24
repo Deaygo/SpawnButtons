@@ -1,6 +1,6 @@
 name: Spawn Buttons
 main: net.deaygo.SpawnButtons.SpawnButtons
-version: 0.1
+version: 0.2
 author: Deaygo
 commands:
     spawnblocks:

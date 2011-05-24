@@ -11,9 +11,12 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.Event.Result;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerBedEnterEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerListener;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.material.Bed;
 
 public class SBPlayerListener extends PlayerListener {
     private static final long serialVersionUID = 4308676690438696095L;
@@ -35,10 +38,44 @@ public class SBPlayerListener extends PlayerListener {
             }
         }
     }
-
-
+    
+    @Override
+    public void onPlayerBedEnter(PlayerBedEnterEvent event)
+    {
+    	SBPlayer p = settings.getPlayer(event.getPlayer().getName());
+    	Block b = event.getBed();
+    	if ( p == null )
+        {
+            p = settings.addNewPlayer(event.getPlayer().getName());
+        }
+        if (SpawnButtons.Permissions.has(event.getPlayer(), "spawnblocks.use"))
+        {
+            p.setSpawn(new Location(b.getWorld(),b.getX(), b.getY(), b.getZ() + 1));
+            event.getPlayer().sendMessage(ChatColor.GREEN + "This is now your new spawn point.");
+            p.save();
+        }
+    }
+    
+    
 
     @Override
+	public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
+    	String command = event.getMessage().split("\\s*")[0];
+    	if ( command.equalsIgnoreCase("/home"))
+    	{
+    		SBPlayer s = settings.getPlayer(event.getPlayer().getName());
+            if ( s != null )
+            {
+                if (SpawnButtons.Permissions.has(event.getPlayer(), "spawnblocks.use"))
+                {
+                    event.getPlayer().teleport(new Location(s.getSpawn().getWorld(), s.getSpawn().getX(),s.getSpawn().getY(), s.getSpawn().getZ()));
+                    event.setCancelled(true);
+                }
+            }
+    	}
+	}
+
+	@Override
     public void onPlayerInteract(PlayerInteractEvent event) {
         Block b = event.getClickedBlock();
         

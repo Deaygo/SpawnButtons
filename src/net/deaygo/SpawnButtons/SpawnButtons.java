@@ -16,7 +16,7 @@ import com.nijikokun.bukkit.Permissions.Permissions;
 
 public class SpawnButtons extends JavaPlugin {
 
-    SBPlayerListener interactListener;
+    SBPlayerListener playerListener;
     SBSettings settings;
     public static PermissionHandler         Permissions = null;
     PluginDescriptionFile descriptor;
@@ -35,13 +35,15 @@ public class SpawnButtons extends JavaPlugin {
         
         setupPermissions();
         
-        interactListener = new SBPlayerListener(settings);
+        playerListener = new SBPlayerListener(settings);
         
         getCommand("spawnblocks").setExecutor(spawnBlockCommand);
         
         final PluginManager pm = getServer().getPluginManager();
-        pm.registerEvent(Event.Type.PLAYER_INTERACT, interactListener, Priority.Normal, this);
-        pm.registerEvent(Event.Type.PLAYER_RESPAWN, interactListener, Priority.Normal, this);
+        pm.registerEvent(Event.Type.PLAYER_INTERACT, playerListener, Priority.Normal, this);
+        pm.registerEvent(Event.Type.PLAYER_RESPAWN, playerListener, Priority.Normal, this);
+        pm.registerEvent(Event.Type.PLAYER_BED_ENTER, playerListener, Priority.Normal, this);
+        pm.registerEvent(Event.Type.PLAYER_COMMAND_PREPROCESS, playerListener, Priority.High, this);
         
         System.out.println(descriptor.getName() + " version " + descriptor.getVersion() + " loaded.");
     }
