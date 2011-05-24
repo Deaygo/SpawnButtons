@@ -1,6 +1,7 @@
 package net.deaygo.SpawnButtons;
 
 import net.deaygo.SpawnButtons.commands.SpawnBlocksCommand;
+import net.deaygo.SpawnButtons.listeners.SBBlockListener;
 import net.deaygo.SpawnButtons.listeners.SBPlayerListener;
 import net.deaygo.SpawnButtons.model.SBSettings;
 
@@ -17,6 +18,7 @@ import com.nijikokun.bukkit.Permissions.Permissions;
 public class SpawnButtons extends JavaPlugin {
 
     SBPlayerListener playerListener;
+    SBBlockListener blockListener;
     SBSettings settings;
     public static PermissionHandler         Permissions = null;
     PluginDescriptionFile descriptor;
@@ -36,6 +38,7 @@ public class SpawnButtons extends JavaPlugin {
         setupPermissions();
         
         playerListener = new SBPlayerListener(settings);
+        blockListener = new SBBlockListener(settings);
         
         getCommand("spawnblocks").setExecutor(spawnBlockCommand);
         
@@ -44,6 +47,7 @@ public class SpawnButtons extends JavaPlugin {
         pm.registerEvent(Event.Type.PLAYER_RESPAWN, playerListener, Priority.Normal, this);
         pm.registerEvent(Event.Type.PLAYER_BED_ENTER, playerListener, Priority.Normal, this);
         pm.registerEvent(Event.Type.PLAYER_COMMAND_PREPROCESS, playerListener, Priority.High, this);
+        pm.registerEvent(Event.Type.BLOCK_BREAK, playerListener, Priority.Normal, this);
         
         System.out.println(descriptor.getName() + " version " + descriptor.getVersion() + " loaded.");
     }
