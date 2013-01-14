@@ -14,26 +14,19 @@ public class SpawnBlocksCommand implements CommandExecutor {
 
     public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] params) {
         Player p;
-        if (sender instanceof Player)
-        {
+        if (sender instanceof Player) {
             p = (Player) sender;
-        }
-        else
-        {
+        } else {
             return false;
         }
-        
-        if (SpawnButtons.Permissions.has(p, "spawnblocks.create"))
-        {
+
+        if (p.hasPermission("spawnblocks.create")) {
             p.getInventory().addItem(new ItemStack(Material.GLOWSTONE, 1));
             p.sendMessage(ChatColor.GREEN + "Here you go!");
             return true;
-        }
-        else
-        {
+        } else {
             p.sendMessage(ChatColor.RED + "You do not have permissions to use this command.");
             return false;
         }
     }
-
 }
