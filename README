@@ -1,5 +1,4 @@
 How to use this plugin.
-- You require the Permissions Mod
 - People you want to be able to set spawn buttons need the spawnblocks.create  permission
 - People you want to be able to utilize the buttons need the spawnblocks.use   permission
 - To create a spawn block place either a stone button or a stone pressure plate
